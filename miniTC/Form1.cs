@@ -12,13 +12,11 @@ namespace miniTC
 {
     public partial class Form1 : Form, IView
     {
-        // private bool activePanel;
         public Form1()
         {
             InitializeComponent();
         }
 
-        #region IView
         public IPanel LeftPanel
         {
             get
@@ -34,6 +32,15 @@ namespace miniTC
                 return tcPanelRight;
             }
         }
-        #endregion
+
+        public event Action Copy;
+
+        private void buttonCopy_Click(object sender, EventArgs e)
+        {
+            if (Copy != null)
+            {
+                Copy();
+            }
+        }
     }
 }

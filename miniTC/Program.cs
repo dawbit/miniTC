@@ -20,6 +20,7 @@ namespace miniTC
             Model model = new Model();
             IView view = new Form1();
             Presenter presenter = new Presenter(view, model);
+
             Application.Run((Form1)view);
         }
     }

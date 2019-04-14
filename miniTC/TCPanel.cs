@@ -95,7 +95,6 @@ namespace miniTC
 
         public event Action SelectedDirectoryChange;
 
-        //public event Func<string> NewEndPath;
         private void listView_Items_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (SelectedDirectoryChange != null)
@@ -106,7 +105,8 @@ namespace miniTC
 
         private void button_Backwards_Click(object sender, EventArgs e)
         {
-            CurrentPath=Backwards();
+            if (Backwards!=null)
+                CurrentPath = Backwards();
         }
     }
 }

@@ -11,16 +11,7 @@ namespace miniTC
         IPanel LeftPanel { get; }
         IPanel RightPanel { get; }
 
+        event Action Copy;
 
-
-        //string[] Drives { set; }
-        //string[] Items { get;  set; }
-        //string CurrentPath { get; set; }
-
-        //void ErrorMessage(string message);
-
-        //event Func<string[]> GetDrives;
-        //event Func<string, string[]> LoadFilesToDir;
-        //event Func<string> GetPath;
     }
 }

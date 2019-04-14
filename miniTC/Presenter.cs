@@ -10,6 +10,7 @@ namespace miniTC
     {
         IView view;
         Model model;
+
         PanelPresenter left;
         PanelPresenter right;
         public Presenter(IView view, Model model)
@@ -19,6 +20,13 @@ namespace miniTC
 
             this.left = new PanelPresenter(view.LeftPanel, model);
             this.right = new PanelPresenter(view.RightPanel, model);
+
+            this.view.Copy += View_Copy;
+        }
+
+        private void View_Copy()
+        {
+            model.Copy(view.LeftPanel.SelectedDirectory, view.LeftPanel.CurrentPath, view.RightPanel.CurrentPath);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace miniTC
 {
@@ -43,7 +44,6 @@ namespace miniTC
 
         public string[] GetFiles(string CurrentPath)
         {
-            //items.Add(CurrentPath);
             if (Directory.Exists(CurrentPath))
             {
                 List<string> allItems = new List<string>();
@@ -57,11 +57,9 @@ namespace miniTC
 
                     foreach (var dir in Directory.GetDirectories(CurrentPath).ToList())
                         allItems.Add(dir);
-                    //allItems.Add(dir.Remove(0,CurrentPath.Length));
 
                     foreach (var dir in Directory.GetFiles(CurrentPath).ToList())
                         allItems.Add(dir);
-                    //allItems.Add(dir.Remove(0, CurrentPath.Length));
 
                     return allItems.ToArray();
                 }
@@ -98,6 +96,36 @@ namespace miniTC
             }
 
 
+        }
+
+        public void Copy(string Item, string Source, string Destination)
+        {
+            try
+            {
+                if (Item == null || Item.Contains("Error"))
+                {
+                    MessageBox.Show("Error: You need to pick something.");
+                    return;
+                }
+                if (Destination == "" || Destination == null)
+                {
+                    MessageBox.Show("Error: You need to select the destination.");
+                    return;
+                }
+                string ItemName = Item.Substring(Source.Length);
+                Console.WriteLine(Destination + ItemName);
+                File.Copy(Item, Destination + ItemName);
+                MessageBox.Show("Success! Your file was copied successfully.");
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Error: You don't have permission to take this action.");
+            }
+            catch (IOException)
+            {
+                string ItemName = Item.Substring(Source.Length);
+                MessageBox.Show("Error: Item " + ItemName + " already exists.");
+            }
         }
     }
 }
